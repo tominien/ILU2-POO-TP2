@@ -52,7 +52,8 @@ public class BoundaryEmmenager {
 				System.out.println("Attention druide, vous vous être trompés entre le minimum et le maximum !");
 			}
 		} while (effetPotionMax < effetPotionMin);
-		
+
+		// Ajouter le druide dans le village :
 		controlEmmenager.ajouterDruide(nomVisiteur, force, effetPotionMin, effetPotionMax);
 	}
 }
