@@ -16,7 +16,7 @@ public class BoundaryPrendreEtal {
 			if (controlPrendreEtal.resteEtals()) {
 				installerVendeur(nomVendeur);
 			} else {
-				System.out.println("Désolée " + nomVendeur + " je n'ai plus  d'étal qui ne soit pas déjà occupé.");
+				System.out.println("Désolée " + nomVendeur + " je n'ai plus d'étals qui ne soit pas déjà occupé.");
 			}
 		} else {
 			System.out.println("Je suis désolée " + nomVendeur + " mais il faut être un habitant de notre village pour commercer ici.");
@@ -24,7 +24,8 @@ public class BoundaryPrendreEtal {
 	}
 
 	private void installerVendeur(String nomVendeur) {
-		System.out.println("C'est parfait, il me reste un étal pour vous ! Il me faudrait quelques renseignements :");
+		System.out.println("C'est parfait, il me reste un étal pour vous !");
+		System.out.println("Il me faudrait quelques renseignements :");
 
 		String produit = Clavier.entrerChaine("Quels produits souhaitez-vous vendre ?");
 		int nbProduit = Clavier.entrerEntier("Combien souhaitez-vous en vendre ?");
