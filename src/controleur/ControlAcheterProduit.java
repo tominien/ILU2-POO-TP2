@@ -23,4 +23,13 @@ public class ControlAcheterProduit {
 	public Gaulois[] rechercherVendeursProduit(String produit) {
 		return village.rechercherVendeursProduit(produit);
 	}
+
+	public int acheterProduit(String nomVendeur, int quantite) {
+		Etal etal = controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur);
+		if (etal == null) {
+			return -1;
+		}
+		int quantiteeAchetee = etal.acheterProduit(quantite);
+		return quantiteeAchetee;
+	}
 }

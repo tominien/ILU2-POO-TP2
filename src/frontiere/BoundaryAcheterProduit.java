@@ -13,20 +13,41 @@ public class BoundaryAcheterProduit {
 	public boolean verifierHabitant(String nomGaulois) {
 		boolean isHabitant = controlAcheterProduit.isHabitant(nomGaulois);
 		if (!isHabitant) {
-			System.out.println("Je suis désolée " + nomGaulois + " mais il faut être un habitant de notre village pour commercer ici.");
+			System.out.println("Je suis désolée " + nomGaulois
+					+ " mais il faut être un habitant de notre village pour commercer ici.");
 		}
 		return isHabitant;
 	}
 
 	public void acheterProduit(String nomAcheteur) {
 		if (verifierHabitant(nomAcheteur)) {
-			String produit = Clavier.entrerChaine("quel produit souhaitez-vous acheter ?\n");
+			String produit = Clavier.entrerChaine("Quel produit souhaitez-vous acheter ?\n");
 			Gaulois[] vendeursProduit = controlAcheterProduit.rechercherVendeursProduit(produit);
 			if (vendeursProduit != null) {
-				for (int i = 0; i < vendeursProduit.length; i++) {
-					System.out.println((i + 1) + " - " + vendeursProduit[i].getNom());
+				int choixUtilisateur;
+				do {
+					StringBuilder question = new StringBuilder();
+					question.append("De quel commerçant voulez-vous acheter des " + produit + " ?\n");
+					for (int i = 0; i < vendeursProduit.length; i++) {
+						question.append((i + 1) + " - " + vendeursProduit[i].getNom() + "\n");
+					}
+					choixUtilisateur = Clavier.entrerEntier(question.toString());
+				} while (0 >= choixUtilisateur || choixUtilisateur > vendeursProduit.length);
+				choixUtilisateur--;
+				String nomVendeur = vendeursProduit[choixUtilisateur].getNom();
+				System.out.println(nomAcheteur + " se déplace jusqu'à l'étal du vendeur " + nomVendeur + ".");
+				int quantite = Clavier.entrerEntier("Combien de " + produit + " voulez-vous acheter ?");
+				int quantiteAchetee = controlAcheterProduit.acheterProduit(nomVendeur, quantite);
+				if (quantiteAchetee == 0) {
+					System.out.println(nomAcheteur + " veut acheter " + quantite + " " + produit
+							+ ", malheureusement il n'y en a plus !");
+				} else if (quantiteAchetee == quantite) {
+					System.out.println(nomAcheteur + " achète " + quantiteAchetee + " " + produit + " à " + nomVendeur);
+				} else {
+					System.out.println(nomAcheteur + " veut acheter " + quantite + " " + produit
+							+ ", malheureusement " + nomVendeur + " n'en a plus que " + quantiteAchetee + ".\n"
+							+ nomAcheteur + " achète tout le stock de " + nomVendeur + ".");
 				}
-				// Demander de quel commerçant on veut acheter le produit et boucler tant qu'on n'a pas un commerçant valide.
 			} else {
 				System.out.println("Désolé, personne ne vend de ce produit au marché.");
 			}
