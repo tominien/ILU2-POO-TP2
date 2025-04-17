@@ -17,11 +17,21 @@ public class ControlAcheterProduit {
 	}
 
 	public boolean isHabitant(String nom) {
-		return village.trouverHabitant(nom) != null;
+		return controlVerifierIdentite.verifierIdentite(nom);
 	}
 
-	public Gaulois[] rechercherVendeursProduit(String produit) {
-		return village.rechercherVendeursProduit(produit);
+	public String[] rechercherVendeursProduit(String produit) {
+		Gaulois[] vendeursProduit = village.rechercherVendeursProduit(produit);
+		if (vendeursProduit == null) {
+			return null;
+		}
+		
+		String[] nomsVendeurs = new String[vendeursProduit.length];
+		for (int i = 0; i < vendeursProduit.length; i++) {
+			nomsVendeurs[i] = vendeursProduit[i].getNom();
+		}
+
+		return nomsVendeurs;
 	}
 
 	public int acheterProduit(String nomVendeur, int quantite) {

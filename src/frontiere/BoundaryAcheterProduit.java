@@ -1,6 +1,5 @@
 package frontiere;
 
-import personnages.Gaulois;
 import controleur.ControlAcheterProduit;
 
 public class BoundaryAcheterProduit {
@@ -22,19 +21,19 @@ public class BoundaryAcheterProduit {
 	public void acheterProduit(String nomAcheteur) {
 		if (verifierHabitant(nomAcheteur)) {
 			String produit = Clavier.entrerChaine("Quel produit souhaitez-vous acheter ?\n");
-			Gaulois[] vendeursProduit = controlAcheterProduit.rechercherVendeursProduit(produit);
+			String[] vendeursProduit = controlAcheterProduit.rechercherVendeursProduit(produit);
 			if (vendeursProduit != null) {
 				int choixUtilisateur;
 				do {
 					StringBuilder question = new StringBuilder();
 					question.append("De quel commerçant voulez-vous acheter des " + produit + " ?\n");
 					for (int i = 0; i < vendeursProduit.length; i++) {
-						question.append((i + 1) + " - " + vendeursProduit[i].getNom() + "\n");
+						question.append((i + 1) + " - " + vendeursProduit[i] + "\n");
 					}
 					choixUtilisateur = Clavier.entrerEntier(question.toString());
 				} while (0 >= choixUtilisateur || choixUtilisateur > vendeursProduit.length);
 				choixUtilisateur--;
-				String nomVendeur = vendeursProduit[choixUtilisateur].getNom();
+				String nomVendeur = vendeursProduit[choixUtilisateur];
 				System.out.println(nomAcheteur + " se déplace jusqu'à l'étal du vendeur " + nomVendeur + ".");
 				int quantite = Clavier.entrerEntier("Combien de " + produit + " voulez-vous acheter ?");
 				int quantiteAchetee = controlAcheterProduit.acheterProduit(nomVendeur, quantite);

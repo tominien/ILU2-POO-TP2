@@ -69,8 +69,10 @@ public class Etal {
 			donneesVente[2] = produit;
 			donneesVente[3] = String.valueOf(quantiteDebutMarche);
 			donneesVente[4] = String.valueOf(quantiteDebutMarche - quantite);
+			return donneesVente;
+		} else {
+			return null;
 		}
-		return donneesVente;
 	}
 
 }
